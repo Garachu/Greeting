@@ -1,0 +1,148 @@
+Google Cloud Shell/Cloud SDK gcloud command.
+
+
+
+https://8080-dot-3034610-dot-devshell.appspot.com/greeting
+
+#local machine
+gcloud auth login
+gcloud components update app
+gcloud components install app
+
+#Google cloud shell didn't work
+TUTORIALDIR=~/src/greeting-177918/java_gae_quickstart-2017-08-25-21-42
+git clone https://github.com/GoogleCloudPlatform/appengine-try-java.git $TUTORIALDIR
+
+#Google cloud shell-a commandline environment running in the cloud
+gcloud auth list
+gcloud config list project
+gloud config set project <PROJECT-ID>
+
+sudo update-alternatives --config javac
+
+COMMAND: ./mvnw -DskipTests spring-boot:run
+-------------------------------------------
+
+gcloud app create --region us-central
+COMMAND: ./mvnw -DskipTests appengine:deploy
+---------------------------------------------
+[ERROR] Failed to execute goal com.google.cloud.tools:appengine-maven-plugin:1.2.1:deploy (default-cli) on project Greeting: Execution default-cli of goal com.google.cloud.tools:appengine-maven-plugin:1.2.1:deploy failed: Non zero exit: 1 -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginExecutionException
+margaret_garachu@greeting-177918:~/Greeting$ mvn war:exploded appengine:run
+
+
+COMMAND: mvn war:exploded appengine:run
+-----------------------------------------------------
+[ERROR] Failed to execute goal com.google.cloud.tools:appengine-maven-plugin:1.2.1:run (default-cli) on project Greeting: Dev App Server does not support App Engine Flexible Environment applications. -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+
+
+http://greeting-177918.appspot.com/greeting
+
+
+There's also an existing bug about the dev server (gcloud preview app run) not respecting the health_check setting. It's still using the old and deprecated 'vm_health_check'. To get your settings to take effect in the dev server you'll need to use vm_health_check for now.
+--------------------------------------------------------------------------------------
+vm_health_check:
+  enable_health_check: False
+
+Then
+
+COMMAND: gcloud app deploy
+---------------------------------------
+ERROR: (gcloud.app.deploy) Error Response: [13] Unexpected Error. ()
+
+
+COMMAND: gloud --version
+-----------------------------
+Google Cloud SDK 168.0.0
+alpha 2017.03.24
+app-engine-go
+app-engine-java 1.9.54
+app-engine-python 1.9.57
+beta 2017.03.24
+bq 2.0.25
+cloud-datastore-emulator 1.2.1
+core 2017.08.21
+datalab 20170525
+docker-credential-gcr
+gcd-emulator v1beta3-1.0.0
+gcloud
+gsutil 4.27
+kubectl
+pubsub-emulator 2017.08.07
+
+
+
+
+
+
+
+UGRADE TO MAVEN 3.5
+------------------------
+
+    $ sudo tar -zxvf maven-3.5.0-bin.tar.gz
+
+    $ sudo mv apache-maven-3.5.0 /usr/local/.
+
+    # sudo nano /etc/profile.d/mavenenv.sh
+
+
+            export M2_HOME=/usr/local/apache-maven-3.5.0
+
+            export M2=$M2_HOME/bin
+
+            export MAVEN_OPTS="-Xms256m -Xmx512m"
+
+            export PATH=$M2:$PATH
+
+
+    #source is a bash build-in command (not a program - like ls or grep). I think one approach is to login as root and then execute the source command.
+
+        $ sudo -s
+
+        $ source /etc/profile.d/mavenenv.sh
+
+    mvn --version
+
+
+#Didnt execute this command
+mvn archetype:generate -Dappengine-version=1.9.9 -Djava8=true -DCloudSDK_Tooling=false -Dapplication-id=greeting-177918 -Dfilter=com.google.appengine.archetypes:
+
+
+$ mvn appengine:devserver
+
+[ERROR] Failed to execute goal com.google.appengine:appengine-maven-plugin:1.9.54:devserver (default-cli) on project Greeting: The application directory does not exist : /media/meg/Round/Meg/Projects/IntelliJ/Greeting/target/Greeting-0.0.1-SNAPSHOT -> [Help 1]
+
+#don't have this plugin defined you can verify it by
+mvn help:effective-pom
+and observe <build>
+
+
+$ mvn appengine:devserver
+Error assembling JAR: /media/meg/Round/Meg/Projects/IntelliJ/Greeting/target/Greeting-0.0.1-SNAPSHOT.jar is read-only. -> [Help 1]
+
+sudo chmod -R 777 /media/meg/Round/Meg/Projects/IntelliJ/Greeting
+
+mvn archetype:generate -Dappengine-version=1.9.9 -Djava8=true -DCloudSDK_Tooling=false -Dapplication-id=greeting-177918 -Dfilter=com.google.appengine.archetypes:
+Choose a number or apply filter (format: [groupId:]artifactId, case sensitive contains): : Greeting
+Confirm properties configuration:
+groupId: Greeting
+artifactId: Greeting
+version: 1.0-SNAPSHOT
+package: com.greeting
+service: default
+
+
+
+
+
