@@ -143,6 +143,14 @@ package: com.greeting
 service: default
 
 
+#Google cloud shell - a command line environment running in the Cloud.
+#This Debian-based virtual machine is loaded with all the development tools you'll need (docker, gcloud, kubectl and more),
+gcloud auth list
+gcloud config list project
+gcloud config set project <PROJECT_ID>
+sudo update-alternatives --config javac
+sudo update-alternatives --config java
+
 
 
 
